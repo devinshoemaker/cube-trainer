@@ -1,0 +1,6 @@
+{
+  "name": "cube-trainer",
+  "devDependencies": {
+    "@capacitor/cli": "^2.4.5"
+  }
+}
