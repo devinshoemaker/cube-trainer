@@ -9,5 +9,6 @@ describe('cube-trainer', () => {
 
     // Function helper example, see `../support/app.po.ts` file
     getGreeting().contains('Welcome cube-trainer');
+    cy.findByText(/welcome/i).should('exist');
   });
 });
