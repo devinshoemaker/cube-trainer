@@ -1,10 +1,37 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
+import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
+import { Session } from '@supabase/supabase-js';
+import { useEffect, useState } from 'react';
+import { Link, Navigate, Route, Routes } from 'react-router-dom';
+
+import { supabase } from '../supabase-client';
 import NxWelcome from './nx-welcome';
 
-import { Route, Routes, Link } from 'react-router-dom';
-
 export function App() {
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
+  if (!session) {
+    return (
+      <Routes>
+        <Route
+          path="/auth"
+          element={
+            <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
+          }
+        />
+        <Route path="*" element={<Navigate to="/auth" />} />
+      </Routes>
+    );
+  }
   return (
     <>
       <NxWelcome title="cube-trainer" />

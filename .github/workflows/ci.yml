@@ -14,10 +14,16 @@ jobs:
           node-version: 16
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
 
       - run: npx nx workspace-lint
       - run: npx nx format:check
       - run: npx nx affected --target=lint --parallel=3
-      - run: npx nx affected --target=test --parallel=3 --ci --code-coverage
-      - run: npx nx affected --target=e2e --parallel=3
       - run: npx nx affected --target=build --parallel=3
+      - run: cp apps/cube-trainer/.env.example apps/cube-trainer/.env
+      - run: npx nx affected --target=test --parallel=3 --ci --code-coverage
+      - run: supabase start
+      - run: supabase db reset
+      - run: npx nx affected --target=e2e --parallel=3

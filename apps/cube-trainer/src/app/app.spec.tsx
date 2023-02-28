@@ -14,12 +14,12 @@ describe('App', () => {
     expect(baseElement).toBeTruthy();
   });
 
-  it('should have a greeting as the title', () => {
+  it('should render the authentication page by default', () => {
     const { getByText } = render(
       <BrowserRouter>
         <App />
       </BrowserRouter>
     );
-    expect(getByText(/Welcome cube-trainer/gi)).toBeTruthy();
+    expect(getByText(/Sign In/gi)).toBeTruthy();
   });
 });
