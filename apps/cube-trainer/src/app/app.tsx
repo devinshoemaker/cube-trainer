@@ -5,7 +5,6 @@ import {
   setupIonicReact,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { Session } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
@@ -31,6 +30,7 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 
 /* Theme variables */
+import Authentication from './pages/auth';
 import './theme/variables.css';
 
 setupIonicReact();
@@ -54,10 +54,7 @@ export function App() {
         <IonReactRouter>
           <IonRouterOutlet>
             <Route path="/auth">
-              <Auth
-                supabaseClient={supabase}
-                appearance={{ theme: ThemeSupa }}
-              />
+              <Authentication />
             </Route>
             <Redirect to="/auth" />
           </IonRouterOutlet>

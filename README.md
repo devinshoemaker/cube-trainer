@@ -22,10 +22,18 @@ Start local Supabase instance:
 npx supabase start
 ```
 
-Serve the application:
+### Web
 
 ```bash
 nx serve cube-trainer
+```
+
+### iOS
+
+```bash
+nx build
+npx cap sync ios
+npx cap open ios
 ```
 
 ## Running E2E Tests

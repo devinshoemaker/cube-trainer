@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "cube-trainer",
+  "defaultProject": "cube-trainer",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
