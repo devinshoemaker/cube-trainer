@@ -2,6 +2,11 @@ describe('auth', () => {
   const email = 'test@email.com';
 
   beforeEach(() => {
+    cy.deleteUserByEmail(
+      email,
+      Cypress.env('SUPABASE_URL'),
+      Cypress.env('SUPABASE_SERVICE_ROLE_KEY')
+    );
     cy.visit('/');
   });
 
@@ -15,13 +20,7 @@ describe('auth', () => {
     cy.findByPlaceholderText(/your email address/i).type(email);
     cy.findByPlaceholderText(/your password/i).type('password');
     cy.findByText(/sign up/i).click();
-    cy.findByText(/welcome/i).should('exist');
-
-    cy.deleteUserByEmail(
-      email,
-      Cypress.env('SUPABASE_URL'),
-      Cypress.env('SUPABASE_SERVICE_ROLE_KEY')
-    );
+    cy.findByText(/Explore/i).should('exist');
   });
 
   it('should not allow two users with the same email to be registered', () => {
@@ -29,7 +28,7 @@ describe('auth', () => {
     cy.findByPlaceholderText(/your email address/i).type(email);
     cy.findByPlaceholderText(/your password/i).type('password');
     cy.findByText(/sign up/i).click();
-    cy.findByText(/welcome/i).should('exist');
+    cy.findByText(/Explore/i).should('exist');
     cy.clearAllCookies();
     cy.clearAllLocalStorage();
     cy.visit('/');
@@ -38,12 +37,6 @@ describe('auth', () => {
     cy.findByPlaceholderText(/your password/i).type('password');
     cy.findByText(/sign up/i).click();
     cy.findByText(/User already registered/i);
-
-    cy.deleteUserByEmail(
-      email,
-      Cypress.env('SUPABASE_URL'),
-      Cypress.env('SUPABASE_SERVICE_ROLE_KEY')
-    );
   });
 
   it('should show an error if a user attempts to log in with invalid credentials', () => {

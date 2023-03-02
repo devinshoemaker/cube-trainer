@@ -15,6 +15,10 @@ const deleteUser = async (
     throw new Error(result.error.message);
   }
 
+  if (!result.data || result.data.length === 0) {
+    return;
+  }
+
   const user = result.data[0];
   await supabaseAdmin.auth.admin.deleteUser(user.id);
   await supabaseAdmin.from('user').delete().eq('id', user.id);

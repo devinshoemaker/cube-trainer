@@ -32,6 +32,11 @@ export default defineConfig({
   //  ],
   // },
 
+  resolve: {
+    // Workaround to fix inline dependency of a dependency, which is the case in @ionic/react
+    mainFields: ['module'],
+  },
+
   test: {
     globals: true,
     cache: {
@@ -39,5 +44,6 @@ export default defineConfig({
     },
     environment: 'jsdom',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    setupFiles: './src/setupTests.ts',
   },
 });
