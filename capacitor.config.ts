@@ -4,7 +4,7 @@ const config: CapacitorConfig = {
   appId: 'com.devinshoemaker.cubetrainer',
   appName: 'Cube Trainer',
   webDir: './dist/apps/cube-trainer',
-  bundledWebRuntime: false
+  bundledWebRuntime: false,
 };
 
 export default config;
