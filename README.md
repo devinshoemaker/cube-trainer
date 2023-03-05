@@ -12,6 +12,7 @@ Configure environment variables:
 
 ```bash
 cp apps/cube-trainer/.env.example apps/cube-trainer/.env
+cp apps/cube-trainer/.env.e2e.example apps/cube-trainer/.env.e2e
 ```
 
 ## Running the App
@@ -25,7 +26,7 @@ npx supabase start
 ### Web
 
 ```bash
-nx serve cube-trainer
+nx serve
 ```
 
 ### iOS
@@ -39,7 +40,7 @@ npx cap open ios
 ## Running E2E Tests
 
 ```bash
-nx e2e cube-trainer-e2e
+nx e2e
 ```
 
 ## Database Migrations

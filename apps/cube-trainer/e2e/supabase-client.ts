@@ -1,11 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 
-const deleteUser = async (
-  email: string,
-  supabaseUrl: string,
-  supabaseServiceRoleKey: string
-) => {
-  const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
+const supabaseAdmin = createClient(
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  process.env.SUPABASE_URL!,
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+export const deleteUser = async (email: string) => {
   const result = await supabaseAdmin
     .from('user')
     .select('id')
@@ -23,5 +24,3 @@ const deleteUser = async (
   await supabaseAdmin.auth.admin.deleteUser(user.id);
   await supabaseAdmin.from('user').delete().eq('id', user.id);
 };
-
-deleteUser(process.argv[2], process.argv[3], process.argv[4]);

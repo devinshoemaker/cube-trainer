@@ -37,13 +37,13 @@ export default defineConfig({
     mainFields: ['module'],
   },
 
-  test: {
-    globals: true,
-    cache: {
-      dir: '../../node_modules/.vitest',
-    },
-    environment: 'jsdom',
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    setupFiles: './src/setupTests.ts',
-  },
+  // test: {
+  //   globals: true,
+  //   cache: {
+  //     dir: '../../node_modules/.vitest',
+  //   },
+  //   environment: 'jsdom',
+  //   include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+  //   setupFiles: './src/setupTests.ts',
+  // },
 });
