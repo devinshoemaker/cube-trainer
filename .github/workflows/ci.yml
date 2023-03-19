@@ -22,8 +22,15 @@ jobs:
       - run: npx nx format:check
       - run: npx nx affected --target=lint --parallel=3
       - run: npx nx affected --target=build --parallel=3
+      - run: npx cap sync
       - run: cp apps/cube-trainer/.env.example apps/cube-trainer/.env
-      - run: npx nx affected --target=test --parallel=3 --ci --code-coverage
+      - run: cp apps/cube-trainer/.env.e2e.example apps/cube-trainer/.env.e2e
       - run: supabase start
-      - run: supabase db reset
-      - run: npx nx affected --target=e2e --parallel=3
+      - run: npx playwright install --with-deps
+      - run: npx nx e2e cube-trainer
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: apps/cube-trainer/playwright-report/
+          retention-days: 30

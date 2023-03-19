@@ -52,19 +52,23 @@
         }
       }
     },
-    "test": {
-      "executor": "@nrwl/vite:test",
-      "outputs": ["coverage/apps/cube-trainer"],
-      "options": {
-        "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/cube-trainer"
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/cube-trainer/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/cube-trainer",
+        "command": "npx playwright test"
+      },
+      "configurations": {
+        "debug": {
+          "command": "npx playwright test --debug"
+        }
       }
     }
   },
