@@ -32,12 +32,18 @@ export default defineConfig({
   //  ],
   // },
 
-  test: {
-    globals: true,
-    cache: {
-      dir: '../../node_modules/.vitest',
-    },
-    environment: 'jsdom',
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+  resolve: {
+    // Workaround to fix inline dependency of a dependency, which is the case in @ionic/react
+    mainFields: ['module'],
   },
+
+  // test: {
+  //   globals: true,
+  //   cache: {
+  //     dir: '../../node_modules/.vitest',
+  //   },
+  //   environment: 'jsdom',
+  //   include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+  //   setupFiles: './src/setupTests.ts',
+  // },
 });
