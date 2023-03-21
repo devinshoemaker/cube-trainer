@@ -3,3 +3,5 @@
 /dist
 /coverage
 /ios
+
+/apps/cube-trainer/public/mockServiceWorker.js

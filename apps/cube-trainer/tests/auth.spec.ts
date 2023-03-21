@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
 import { expect, test } from '@playwright/test';
-import { mockTest } from './mock-test';
 
-import { deleteUser } from './supabase-client';
+import { mockTest } from './lib/mock-test';
+import { deleteUser } from './lib/supabase-client';
 
 test.describe('auth', () => {
   test('should allow users to sign up', async ({ page }) => {
@@ -51,7 +51,10 @@ test.describe('auth', () => {
     const email = faker.internet.email();
     const password = faker.internet.password();
     await page.goto('/');
-    await page.getByPlaceholder(/your email address/i).fill(email);
+    await page
+      .getByPlaceholder(/your email address/i)
+      .first()
+      .fill(email);
     await page.getByPlaceholder(/your password/i).fill(password);
     await page.getByText(/sign in/i).click();
     await expect(page.getByText(/Invalid login credentials/i)).toBeVisible();

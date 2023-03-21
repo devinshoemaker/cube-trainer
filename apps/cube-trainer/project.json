@@ -59,7 +59,7 @@
         "lintFilePatterns": ["apps/cube-trainer/**/*.{ts,tsx,js,jsx}"]
       }
     },
-    "e2e": {
+    "test": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/cube-trainer",
