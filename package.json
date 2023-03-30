@@ -2,7 +2,9 @@
   "name": "cube-trainer",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "ci": "npx nx workspace-lint && npx nx format:check && npx nx affected --target=lint && npx nx affected --target=build && npx cap sync && npx nx affected --target=test"
+  },
   "private": true,
   "dependencies": {
     "@capacitor/app": "4.1.1",
@@ -54,6 +56,7 @@
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "@vitejs/plugin-react": "^3.0.0",
+    "autoprefixer": "10.4.13",
     "dotenv": "^16.0.3",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
@@ -65,12 +68,17 @@
     "msw": "^1.1.0",
     "nx": "15.6.3",
     "playwright-msw": "^2.2.0",
+    "postcss": "8.4.19",
     "prettier": "^2.6.2",
     "react-test-renderer": "18.2.0",
     "supabase": "^1.38.7",
+    "tailwindcss": "3.2.4",
     "typescript": "~4.8.2",
     "vite": "^4.0.1",
     "vite-plugin-eslint": "^1.8.1",
     "vite-tsconfig-paths": "^4.0.2"
+  },
+  "msw": {
+    "workerDirectory": "apps/cube-trainer/public"
   }
 }

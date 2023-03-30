@@ -12,6 +12,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'npm'
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
       - uses: supabase/setup-cli@v1
@@ -27,7 +28,7 @@ jobs:
       - run: cp apps/cube-trainer/.env.e2e.example apps/cube-trainer/.env.e2e
       - run: supabase start
       - run: npx playwright install --with-deps
-      - run: npx nx e2e cube-trainer
+      - run: npx nx affected --target=test --parallel=3
       - uses: actions/upload-artifact@v3
         if: always()
         with:

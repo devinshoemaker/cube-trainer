@@ -1,0 +1,8 @@
+/// <reference types="vite/client" />
+interface ImportMetaEnv {
+  readonly VITE_MOCKS: boolean;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
