@@ -7,7 +7,8 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
 
 import { supabase } from '../../supabase-client';
 
@@ -29,7 +30,11 @@ const Authentication: React.FC = () => {
             <IonTitle size="large">Auth</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
+        <Auth
+          supabaseClient={supabase}
+          appearance={{ theme: ThemeSupa }}
+          providers={[]}
+        />
       </IonContent>
     </IonPage>
   );
