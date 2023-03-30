@@ -12,6 +12,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { supabase } from '../supabase-client';
 import Menu from './components/Menu';
 import Authentication from './pages/auth';
+import OllList from './pages/oll-list';
 import Page from './pages/Page';
 import Timer from './pages/timer';
 
@@ -84,6 +85,9 @@ export function App() {
             </Route>
             <Route path="/timer" exact={true}>
               <Timer />
+            </Route>
+            <Route path="/oll-list" exact={true}>
+              <OllList />
             </Route>
             <Redirect to="/" />
           </IonRouterOutlet>

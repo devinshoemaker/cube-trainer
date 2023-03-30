@@ -21,6 +21,10 @@ const appPages: AppPage[] = [
     title: 'Timer',
     url: 'timer',
   },
+  {
+    title: 'OLL List',
+    url: 'oll-list',
+  },
 ];
 
 const Menu: React.FC = () => {

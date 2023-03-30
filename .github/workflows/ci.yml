@@ -22,6 +22,7 @@ jobs:
       - run: npx nx format:check
       - run: npx nx affected --target=lint --parallel=3
       - run: npx nx affected --target=build --parallel=3
+      - run: npx nx affected --target=build-storybook --parallel=3
       - run: npx cap sync
       - run: cp apps/cube-trainer/.env.example apps/cube-trainer/.env
       - run: cp apps/cube-trainer/.env.e2e.example apps/cube-trainer/.env.e2e
