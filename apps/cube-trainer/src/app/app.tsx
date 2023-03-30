@@ -6,6 +6,7 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Session } from '@supabase/supabase-js';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
@@ -41,6 +42,8 @@ export function App() {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const queryClient = new QueryClient();
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -72,28 +75,30 @@ export function App() {
   }
 
   return (
-    <IonApp>
-      <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu />
-          <IonRouterOutlet id="main">
-            <Route path="/" exact={true}>
-              <Redirect to="/page/Inbox" />
-            </Route>
-            <Route path="/page/:name" exact={true}>
-              <Page />
-            </Route>
-            <Route path="/timer" exact={true}>
-              <Timer />
-            </Route>
-            <Route path="/oll-list" exact={true}>
-              <OllList />
-            </Route>
-            <Redirect to="/" />
-          </IonRouterOutlet>
-        </IonSplitPane>
-      </IonReactRouter>
-    </IonApp>
+    <QueryClientProvider client={queryClient}>
+      <IonApp>
+        <IonReactRouter>
+          <IonSplitPane contentId="main">
+            <Menu />
+            <IonRouterOutlet id="main">
+              <Route path="/" exact={true}>
+                <Redirect to="/page/Inbox" />
+              </Route>
+              <Route path="/page/:name" exact={true}>
+                <Page />
+              </Route>
+              <Route path="/timer" exact={true}>
+                <Timer />
+              </Route>
+              <Route path="/oll-list" exact={true}>
+                <OllList />
+              </Route>
+              <Redirect to="/" />
+            </IonRouterOutlet>
+          </IonSplitPane>
+        </IonReactRouter>
+      </IonApp>
+    </QueryClientProvider>
   );
 }
 
