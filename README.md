@@ -20,7 +20,7 @@ cp apps/cube-trainer/.env.e2e.example apps/cube-trainer/.env.e2e
 Start local Supabase instance:
 
 ```bash
-npx supabase start
+npm run supabase:start
 ```
 
 ### Web

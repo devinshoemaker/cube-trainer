@@ -25,7 +25,7 @@ jobs:
       - run: npx cap sync
       - run: cp apps/cube-trainer/.env.example apps/cube-trainer/.env
       - run: cp apps/cube-trainer/.env.e2e.example apps/cube-trainer/.env.e2e
-      - run: supabase start
+      - run: npm run supabase:start
       - run: npx playwright install --with-deps
       - run: npx nx affected --target=test --parallel=3
       - uses: actions/upload-artifact@v3
