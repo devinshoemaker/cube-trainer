@@ -50,5 +50,5 @@ Make database changes using [Supabase Studio](http://localhost:54323)
 Generate migrations:
 
 ```bash
-supabase db diff <migration_name> -f <migration_name>
+npx supabase db diff <migration_name> -f <migration_name>
 ```
