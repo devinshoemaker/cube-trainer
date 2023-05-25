@@ -8,9 +8,8 @@ import {
   IonToolbar,
 } from '@ionic/react';
 import { Auth } from '@supabase/auth-ui-react';
-import { ThemeSupa } from '@supabase/auth-ui-shared';
 
-import { supabase } from '../../supabase-client';
+import { supabase } from '../lib/supabase-client';
 
 const Authentication: React.FC = () => {
   return (
@@ -30,11 +29,7 @@ const Authentication: React.FC = () => {
             <IonTitle size="large">Auth</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <Auth
-          supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
-          providers={[]}
-        />
+        <Auth supabaseClient={supabase} providers={[]} />
       </IonContent>
     </IonPage>
   );

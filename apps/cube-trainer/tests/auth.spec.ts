@@ -17,7 +17,7 @@ test.describe('auth', () => {
     await page.getByPlaceholder('Your email address').press('Tab');
     await page.getByPlaceholder('Your password').fill('password');
     await page.getByRole('button', { name: 'Sign up' }).click();
-    await expect(page).toHaveURL('/page/Inbox');
+    await expect(page).toHaveURL('/timer');
     await deleteUser(email);
   });
 
@@ -33,7 +33,7 @@ test.describe('auth', () => {
     await page.getByPlaceholder(/your email address/i).fill(email);
     await page.getByPlaceholder(/your password/i).fill('password');
     await page.getByText(/sign up/i).click();
-    await expect(page).toHaveURL('/page/Inbox');
+    await expect(page).toHaveURL('/timer');
     await page.context().clearCookies();
     await page.evaluate(() => window.localStorage.clear());
     await page.goto('/auth');
@@ -72,6 +72,6 @@ test.describe('auth', () => {
     await page.getByPlaceholder('Your email address').press('Tab');
     await page.getByPlaceholder('Your password').fill('password');
     await page.getByRole('button', { name: 'Sign up' }).click();
-    await expect(page).toHaveURL('/page/Inbox');
+    await expect(page).toHaveURL('/timer');
   });
 });

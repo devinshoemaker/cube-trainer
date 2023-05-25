@@ -19,7 +19,11 @@ interface AppPage {
 const appPages: AppPage[] = [
   {
     title: 'Timer',
-    url: 'timer',
+    url: '/timer',
+  },
+  {
+    title: 'OLL List',
+    url: '/oll-list',
   },
 ];
 
