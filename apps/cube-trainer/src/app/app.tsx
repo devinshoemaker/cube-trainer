@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import SplitPane from './components/split-pane';
 import SessionContextProvider from './lib/session-context';
 import Authentication from './pages/auth';
+import DefaultRoute from './pages/default-route';
 import OllId from './pages/oll-list/oll-id';
 import OllList from './pages/oll-list/oll-list';
 import TimerPage from './pages/timer';
@@ -50,7 +51,7 @@ export function App() {
                 <Route path="/oll-list" exact component={OllList} />
                 <Route path="/oll-list/:ollName" component={OllId} />
 
-                {/* <Route exact path="/" render={() => <Redirect to="/timer" />} /> */}
+                <Route exact path="/" component={DefaultRoute} />
               </IonRouterOutlet>
             </SplitPane>
           </IonReactRouter>
