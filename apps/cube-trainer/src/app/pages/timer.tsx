@@ -18,6 +18,7 @@ function TimerPage() {
   const history = useHistory();
   if (!session) {
     history.push('/auth');
+    return null;
   }
 
   return (

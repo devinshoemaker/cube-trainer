@@ -42,9 +42,7 @@ export function App() {
           <IonReactRouter>
             <SplitPane>
               <IonRouterOutlet id="main">
-                <Route path="/auth">
-                  <Authentication />
-                </Route>
+                <Route path="/auth" component={Authentication} />
 
                 <Route path="/timer" component={TimerPage} />
 

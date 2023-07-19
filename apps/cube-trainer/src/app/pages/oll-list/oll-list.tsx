@@ -19,13 +19,15 @@ import { SessionContext } from '../../lib/session-context';
 const OllList = () => {
   const session = useContext(SessionContext);
   const history = useHistory();
-  if (!session) {
-    history.push('/auth');
-  }
   
   const { user, isLoadingUser } = useGetCurrentUser();
   const { ollStatuses, isLoadingOllStatuses } = useGetOllStatuses(user?.id);
-
+  
+  if (!session) {
+    history.push('/auth');
+    return null;
+  }
+  
   if (!user || isLoadingUser || isLoadingOllStatuses || !ollStatuses) {
     return null;
   }

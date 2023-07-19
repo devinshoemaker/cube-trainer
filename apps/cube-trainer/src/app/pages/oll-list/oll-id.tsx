@@ -7,17 +7,27 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
 import Timer from '../../components/timer/timer';
+import { SessionContext } from '../../lib/session-context';
 import OllCard from './components/oll-card';
 import { useGetCurrentUser, useGetOllStatuses } from './lib/hooks';
 import { mapOllsToStatuses } from './lib/olls';
 
 const OllId = () => {
+  const session = useContext(SessionContext);
+  const history = useHistory();
+  
   const { ollName } = useParams<{ ollName: string }>();
   const { user, isLoadingUser } = useGetCurrentUser();
   const { ollStatuses, isLoadingOllStatuses } = useGetOllStatuses(user?.id);
+
+  if (!session) {
+    history.push('/auth');
+    return null;
+  }
 
   if (!user || isLoadingUser || isLoadingOllStatuses || !ollStatuses) {
     return null;
