@@ -9,8 +9,17 @@ import {
 } from '@ionic/react';
 
 import Timer from '../components/timer/timer';
+import { useContext } from 'react';
+import { SessionContext } from '../lib/session-context';
+import { useHistory } from 'react-router-dom';
 
 function TimerPage() {
+  const session = useContext(SessionContext);
+  const history = useHistory();
+  if (!session) {
+    history.push('/auth');
+  }
+
   return (
     <IonPage>
       <IonHeader>

@@ -10,8 +10,17 @@ import {
 import { Auth } from '@supabase/auth-ui-react';
 
 import { supabase } from '../lib/supabase-client';
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { SessionContext } from '../lib/session-context';
 
 const Authentication: React.FC = () => {
+  const session = useContext(SessionContext);
+  const history = useHistory();
+  if (session) {
+    history.push('/timer');
+  }
+  
   return (
     <IonPage>
       <IonHeader>

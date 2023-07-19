@@ -12,8 +12,17 @@ import {
 import OllCard from './components/oll-card';
 import { useGetCurrentUser, useGetOllStatuses } from './lib/hooks';
 import { mapOllsToStatuses } from './lib/olls';
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { SessionContext } from '../../lib/session-context';
 
 const OllList = () => {
+  const session = useContext(SessionContext);
+  const history = useHistory();
+  if (!session) {
+    history.push('/auth');
+  }
+  
   const { user, isLoadingUser } = useGetCurrentUser();
   const { ollStatuses, isLoadingOllStatuses } = useGetOllStatuses(user?.id);
 

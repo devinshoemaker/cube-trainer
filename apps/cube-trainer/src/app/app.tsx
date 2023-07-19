@@ -1,17 +1,10 @@
-import {
-  IonApp,
-  IonRouterOutlet,
-  IonSplitPane,
-  setupIonicReact,
-} from '@ionic/react';
+import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Session } from '@supabase/supabase-js';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
-import Menu from './components/Menu';
-import { supabase } from './lib/supabase-client';
+import SplitPane from './components/split-pane';
+import SessionContextProvider from './lib/session-context';
 import Authentication from './pages/auth';
 import OllId from './pages/oll-list/oll-id';
 import OllList from './pages/oll-list/oll-list';
@@ -39,60 +32,31 @@ import './theme/variables.css';
 setupIonicReact();
 
 export function App() {
-  const [session, setSession] = useState<Session | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
   const queryClient = new QueryClient();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setIsLoading(false);
-    });
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
-
-  if (isLoading) {
-    return null;
-  }
-
-  if (!session) {
-    return (
-      <IonApp>
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route path="/auth">
-              <Authentication />
-            </Route>
-            <Redirect to="/auth" />
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </IonApp>
-    );
-  }
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <IonApp>
-        <IonReactRouter>
-          <IonSplitPane contentId="main">
-            <Menu />
-            <IonRouterOutlet id="main">
-              <Route path="/timer" component={TimerPage} />
+    <SessionContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <IonApp>
+          <IonReactRouter>
+            <SplitPane>
+              <IonRouterOutlet id="main">
+                <Route path="/auth">
+                  <Authentication />
+                </Route>
 
-              <Route path="/oll-list" exact component={OllList} />
-              <Route path="/oll-list/:ollName" component={OllId} />
+                <Route path="/timer" component={TimerPage} />
 
-              <Route exact path="/" render={() => <Redirect to="/timer" />} />
-              <Route exact path="/auth" render={() => <Redirect to="/" />} />
-            </IonRouterOutlet>
-          </IonSplitPane>
-        </IonReactRouter>
-      </IonApp>
-    </QueryClientProvider>
+                <Route path="/oll-list" exact component={OllList} />
+                <Route path="/oll-list/:ollName" component={OllId} />
+
+                {/* <Route exact path="/" render={() => <Redirect to="/timer" />} /> */}
+              </IonRouterOutlet>
+            </SplitPane>
+          </IonReactRouter>
+        </IonApp>
+      </QueryClientProvider>
+    </SessionContextProvider>
   );
 }
 
