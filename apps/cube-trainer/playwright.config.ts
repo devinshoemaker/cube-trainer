@@ -86,7 +86,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'cd ../../ && nx serve',
+    command: 'cd ../../ && nx serve cube-trainer',
     port: 4200,
     reuseExistingServer: true,
   },
