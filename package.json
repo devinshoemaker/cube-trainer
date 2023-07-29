@@ -44,6 +44,7 @@
     "@faker-js/faker": "^7.6.0",
     "@nx/eslint-plugin": "16.5.5",
     "@nx/linter": "16.5.5",
+    "@nx/next": "^16.5.5",
     "@nx/react": "16.5.5",
     "@nx/vite": "16.5.5",
     "@nx/workspace": "16.5.5",
